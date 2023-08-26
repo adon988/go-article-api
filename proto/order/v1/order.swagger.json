@@ -1,0 +1,138 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "proto/order/v1/order.proto",
+    "version": "1.0"
+  },
+  "tags": [
+    {
+      "name": "OrderService"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/order/{id}/{orderNumber}": {
+      "get": {
+        "summary": "Sends a greeting",
+        "operationId": "OrderService_Get",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1OrderServiceGetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "orderNumber",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "OrderService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1OrderInfo": {
+      "type": "object",
+      "properties": {
+        "orderNumber": {
+          "type": "string"
+        },
+        "productName": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "units": {
+          "type": "string",
+          "format": "int64",
+          "title": "Example: 12345.6789 -\u003e { units = 12345, nanos = 678900000 }\nWhole units part of the amount\nhttps://learn.microsoft.com/zh-tw/dotnet/architecture/grpc-for-wcf-developers/protobuf-data-types#decimals"
+        },
+        "nanos": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Nano units of the amount (10^-9)\nMust be same sign as units"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "title": "datetime\nhttps://learn.microsoft.com/zh-tw/dotnet/architecture/grpc-for-wcf-developers/protobuf-data-types#dates-and-times"
+        }
+      }
+    },
+    "v1OrderServiceGetResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/definitions/v1OrderInfo"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "The response message containing the greetings"
+    }
+  },
+  "externalDocs": {
+    "url": "http://localhost:8081"
+  }
+}

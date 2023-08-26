@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package tool.v1;
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "proto/user/v1/user_info.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+
+option go_package = "github.com/adon988/go-article-api";
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  info: {version: "1.0"};
+  external_docs: {url: "http://localhost:8081"}
+  schemes: HTTP;
+};
+
+// The greeting service definition
+service ToolService {
+  // Sends a greeting
+  rpc Timer(TimerRequest) returns (TimerResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/tool/timer"
+      body: "*"
+    };
+  }
+}
+
+// The request message containing the user's name
+message TimerRequest {
+  string location = 1;
+}
+
+// The response message containing the greetings
+message TimerResponse {
+  string message = 1;
+}
