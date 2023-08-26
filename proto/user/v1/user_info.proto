@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package user.v1;
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+option go_package = "github.com/adon988/go-article-api";
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  info: {version: "1.0"};
+  external_docs: {url: "http://localhost:8081"}
+  schemes: HTTP;
+};
+
+// The request message containing the user's id
+enum SEXUAL {
+  SEXUAL_UNSPECIFIED = 0;
+  SEXUAL_MALE = 1;
+  SEXUAL_FEMALE = 2;
+}
+message UserInfo {
+  string id = 1;
+  string name = 2;
+  int32 age = 3;
+  string email = 4;
+  SEXUAL sexual = 5;
+  map<string, string> tasks = 6;
+}

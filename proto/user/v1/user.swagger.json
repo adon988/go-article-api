@@ -1,0 +1,150 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "proto/user/v1/user.proto",
+    "version": "1.0"
+  },
+  "tags": [
+    {
+      "name": "UserService"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v1/user/info": {
+      "post": {
+        "summary": "Sends a greeting",
+        "operationId": "UserService_Info",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1InfoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1InfoRequest"
+            }
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1InfoRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      },
+      "title": "The request message containing the user's id"
+    },
+    "v1InfoResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/definitions/v1UserInfo"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1SEXUAL": {
+      "type": "string",
+      "enum": [
+        "SEXUAL_UNSPECIFIED",
+        "SEXUAL_MALE",
+        "SEXUAL_FEMALE"
+      ],
+      "default": "SEXUAL_UNSPECIFIED",
+      "title": "The request message containing the user's id"
+    },
+    "v1UserInfo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "age": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "email": {
+          "type": "string"
+        },
+        "sexual": {
+          "$ref": "#/definitions/v1SEXUAL"
+        },
+        "tasks": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "url": "http://localhost:8081"
+  }
+}
